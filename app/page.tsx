@@ -8,15 +8,18 @@ import { Toggle } from "@/components/ui/toggle"
 import { Input } from "@/components/ui/input"
 import { Slider } from "@/components/ui/slider"
 import { useTheme } from "next-themes"
-import { Moon, Sun, Github, Copy, Check, Code, Eye, EyeOff, Package } from "lucide-react"
+import { Moon, Sun, Github, CodeIcon, Code, Eye, EyeOff } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { EyeMovementIcon } from "@/components/eye-movement-icon"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Separator } from "@/components/ui/separator"
+import { CodeModal } from "@/components/code-modal"
 
 export default function Home() {
   const [password, setPassword] = useState("P@ssw0rd123!")
-  const [copied, setCopied] = useState<string | null>(null)
+  const [codeModalOpen, setCodeModalOpen] = useState(false)
+  const [currentCode, setCurrentCode] = useState("")
+  const [currentCodeTitle, setCurrentCodeTitle] = useState("")
 
   // Demo eye settings (controlled by UI)
   const [demoFollowMouse, setDemoFollowMouse] = useState(true)
@@ -34,10 +37,10 @@ export default function Home() {
     setMounted(true)
   }, [])
 
-  const copyToClipboard = (text: string, id: string) => {
-    navigator.clipboard.writeText(text)
-    setCopied(id)
-    setTimeout(() => setCopied(null), 2000)
+  const openCodeModal = (code: string, title: string) => {
+    setCurrentCode(code)
+    setCurrentCodeTitle(title)
+    setCodeModalOpen(true)
   }
 
   if (!mounted) {
@@ -94,13 +97,22 @@ export function IconDemo() {
 }`
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-950">
+    <div className="px-4 mw-[1200px] m-0-auto min-h-screen bg-white dark:bg-gray-950">
+      {/* Code Modal */}
+      <CodeModal
+        isOpen={codeModalOpen}
+        onClose={() => setCodeModalOpen(false)}
+        title={currentCodeTitle}
+        description="Copy this code to use the component in your project"
+        code={currentCode}
+      />
+
       {/* Header */}
       <header className="sticky top-0 z-10 w-full border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-gray-950/80 backdrop-blur-sm">
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-2">
             <Eye className="h-6 w-6" />
-            <span className="text-xl font-bold">Eye Components</span>
+            <span className="text-xl font-bold">Eye Tracking Components</span>
           </div>
           <Button
             variant="outline"
@@ -119,20 +131,22 @@ export function IconDemo() {
       <section className="container py-12 md:py-24 lg:py-32">
         <div className="mx-auto flex max-w-[980px] flex-col items-center gap-4 text-center">
           <h1 className="text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl">
-            Interactive Eye Components
+            Interactive Eye Tracking Components
           </h1>
           <p className="max-w-[700px] text-lg text-gray-600 dark:text-gray-400 md:text-xl">
             A collection of React components for password inputs and interactive eye icons with mouse tracking
             capabilities.
           </p>
           <div className="flex gap-4">
-            <Button className="gap-2">
-              <Package className="h-4 w-4" />
-              <span>Install Package</span>
-            </Button>
-            <Button variant="outline" className="gap-2">
-              <Github className="h-4 w-4" />
-              <span>View on GitHub</span>
+            <Button variant="default" className="gap-2" asChild>
+              <a
+                href="https://github.com/juanmacebal/eye-toggle-password-input"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Github className="h-4 w-4" />
+                <span>View on GitHub</span>
+              </a>
             </Button>
           </div>
         </div>
@@ -155,7 +169,9 @@ export function IconDemo() {
                     <Eye className="h-5 w-5" />
                     <span>Password Input</span>
                   </CardTitle>
-                  <CardDescription>A password input component with an interactive eye toggle</CardDescription>
+                  <CardDescription>
+                    A password input component with an interactive eye mouse tracking toggle
+                  </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div className="space-y-2">
@@ -181,19 +197,10 @@ export function IconDemo() {
                     variant="outline"
                     size="sm"
                     className="gap-2"
-                    onClick={() => copyToClipboard(passwordInputCode, "password-input")}
+                    onClick={() => openCodeModal(passwordInputCode, "Password Input Component")}
                   >
-                    {copied === "password-input" ? (
-                      <>
-                        <Check className="h-4 w-4" />
-                        <span>Copied!</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="h-4 w-4" />
-                        <span>Copy Code</span>
-                      </>
-                    )}
+                    <CodeIcon className="h-4 w-4" />
+                    <span>View Code</span>
                   </Button>
                 </CardFooter>
               </Card>
@@ -232,7 +239,7 @@ export function IconDemo() {
                     <div className="flex items-center justify-between">
                       <Label htmlFor="follow-toggle">Eye follows mouse</Label>
                       <Toggle id="follow-toggle" pressed={demoFollowMouse} onPressedChange={setDemoFollowMouse}>
-                        {demoFollowMouse ? "On" : "Off"}
+                        {demoFollowMouse ? "Off" : "On"}
                       </Toggle>
                     </div>
 
@@ -259,7 +266,7 @@ export function IconDemo() {
                             pressed={demoSlowMovement}
                             onPressedChange={setDemoSlowMovement}
                           >
-                            {demoSlowMovement ? "On" : "Off"}
+                            {demoSlowMovement ? "Off" : "On"}
                           </Toggle>
                         </div>
 
@@ -310,19 +317,10 @@ export function IconDemo() {
                     variant="outline"
                     size="sm"
                     className="gap-2"
-                    onClick={() => copyToClipboard(eyeMovementIconCode, "eye-icon")}
+                    onClick={() => openCodeModal(eyeMovementIconCode, "Eye Movement Icon Component")}
                   >
-                    {copied === "eye-icon" ? (
-                      <>
-                        <Check className="h-4 w-4" />
-                        <span>Copied!</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="h-4 w-4" />
-                        <span>Copy Code</span>
-                      </>
-                    )}
+                    <CodeIcon className="h-4 w-4" />
+                    <span>View Code</span>
                   </Button>
                 </CardFooter>
               </Card>
@@ -460,12 +458,18 @@ export function IconDemo() {
             <span className="font-semibold">Eye Components</span>
           </div>
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            Built with React, Next.js, and Tailwind CSS. Open source and MIT licensed.
+            Built by Juan Manuel Acebal using React, Next.Js and Tailwind CSS
           </p>
           <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon">
-              <Github className="h-5 w-5" />
-              <span className="sr-only">GitHub</span>
+            <Button variant="ghost" size="icon" asChild>
+              <a
+                href="https://github.com/juanmacebal/eye-toggle-password-input"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Github className="h-5 w-5" />
+                <span className="sr-only">GitHub</span>
+              </a>
             </Button>
           </div>
         </div>
