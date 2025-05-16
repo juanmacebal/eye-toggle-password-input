@@ -97,7 +97,7 @@ export function IconDemo() {
 }`
 
   return (
-    <div className="px-4 mw-[1200px] m-0-auto min-h-screen bg-white dark:bg-gray-950">
+    <div className="px-4 min-h-screen bg-white dark:bg-gray-950">
       {/* Code Modal */}
       <CodeModal
         isOpen={codeModalOpen}
@@ -109,7 +109,7 @@ export function IconDemo() {
 
       {/* Header */}
       <header className="sticky top-0 z-10 w-full border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-gray-950/80 backdrop-blur-sm">
-        <div className="container flex h-16 items-center justify-between">
+        <div className="container mx-auto flex h-16 items-center justify-between">
           <div className="flex items-center gap-2">
             <Eye className="h-6 w-6" />
             <span className="text-xl font-bold">Eye Tracking Components</span>
@@ -128,7 +128,7 @@ export function IconDemo() {
       </header>
 
       {/* Hero Section */}
-      <section className="container py-12 md:py-24 lg:py-32">
+      <section className="container mx-auto py-12 md:py-24 lg:py-32">
         <div className="mx-auto flex max-w-[980px] flex-col items-center gap-4 text-center">
           <h1 className="text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl">
             Interactive Eye Tracking Components
@@ -452,7 +452,7 @@ export function IconDemo() {
 
       {/* Footer */}
       <footer className="border-t border-gray-200 dark:border-gray-800 py-8">
-        <div className="container flex flex-col items-center justify-center gap-4 md:flex-row md:justify-between">
+        <div className="container mx-auto flex flex-col items-center justify-center gap-4 md:flex-row md:justify-between">
           <div className="flex items-center gap-2">
             <Eye className="h-5 w-5" />
             <span className="font-semibold">Eye Components</span>
