@@ -153,7 +153,7 @@ export function IconDemo() {
       </section>
 
       {/* Main Content */}
-      <div className="container pb-16">
+      <div className="container mx-auto pb-16">
         <Tabs defaultValue="components" className="w-full">
           <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-8">
             <TabsTrigger value="components">Components</TabsTrigger>
