@@ -1,30 +1,39 @@
-# Eye toggle password input
+# Interactive Eye Tracking Components
 
-*Automatically synced with your [v0.dev](https://v0.dev) deployments*
+A collection of React components for password inputs and interactive eye icons with mouse tracking capabilities.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/juanmacebal-gmailcoms-projects/v0-eye-toggle-password-input)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/U993SMNv7ik)
+---
 
-## Overview
+## Components
 
-This repository will stay in sync with your deployed chats on [v0.dev](https://v0.dev).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.dev](https://v0.dev).
+### PasswordInput Component
 
-## Deployment
+The PasswordInput component extends the standard input element with an interactive eye toggle. This allows users to show or hide their password, and the eye icon can follow the mouse cursor for a more engaging and interactive experience.
 
-Your project is live at:
+**Props:**
 
-**[https://vercel.com/juanmacebal-gmailcoms-projects/v0-eye-toggle-password-input](https://vercel.com/juanmacebal-gmailcoms-projects/v0-eye-toggle-password-input)**
+| Prop           | Type      | Description                                   |
+| -------------- | --------- | --------------------------------------------- |
+| eyeFollowMouse | boolean   | Enable mouse tracking for the eye icon        |
+| followDelay    | number    | Delay in ms before eye starts following mouse |
+| slowMovement   | boolean   | Enable smooth movement animation              |
+| movementSpeed  | number    | Speed of eye movement (1-20)                  |
+| eyeSize        | number    | Size of the eye icon in pixels                |
 
-## Build your app
+---
 
-Continue building your app on:
+### EyeMovementIcon Component
 
-**[https://v0.dev/chat/projects/U993SMNv7ik](https://v0.dev/chat/projects/U993SMNv7ik)**
+The EyeMovementIcon component is a standalone eye icon that can toggle between open and closed states. It also supports mouse tracking and customizable animation settings.
 
-## How It Works
+**Props:**
 
-1. Create and modify your project using [v0.dev](https://v0.dev)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+| Prop           | Type      | Description                                   |
+| -------------- | --------- | --------------------------------------------- |
+| showEye        | boolean   | Toggle between open and closed eye states     |
+| eyeFollowMouse | boolean   | Enable mouse tracking for the eye             |
+| followDelay    | number    | Delay in ms before eye starts following mouse |
+| slowMovement   | boolean   | Enable smooth movement animation              |
+| movementSpeed  | number    | Speed of eye movement (1-20)                  |
+| size           | number    | Size of the eye icon in pixels                |
+
